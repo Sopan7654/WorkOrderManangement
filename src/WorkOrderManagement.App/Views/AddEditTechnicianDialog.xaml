@@ -1,0 +1,97 @@
+<Window x:Class="WorkOrderManagement.App.Views.AddEditTechnicianDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:conv="clr-namespace:WorkOrderManagement.App.Converters"
+        mc:Ignorable="d"
+        Title="{Binding WindowTitle}"
+        Width="440" SizeToContent="Height"
+        Background="{StaticResource BackgroundBrush}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <conv:BoolToVisibilityConverter x:Key="BoolVisible"/>
+        <conv:StringToVisibilityConverter x:Key="StringVisible"/>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Loading overlay -->
+        <Grid Grid.RowSpan="3" Panel.ZIndex="99"
+              Visibility="{Binding IsBusy, Converter={StaticResource BoolVisible}}">
+            <Rectangle Fill="#80000000" RadiusX="8" RadiusY="8"/>
+            <TextBlock Text="{Binding BusyMessage}" FontSize="16" FontWeight="SemiBold"
+                       Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Dialog Title -->
+        <Border Grid.Row="0" Margin="0,0,0,18"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1" Padding="0,0,0,12">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Border Width="36" Height="36" Background="{StaticResource AccentBrush}" CornerRadius="8" Margin="0,0,12,0">
+                    <Path Data="{StaticResource IconUser}" Fill="White"
+                          Width="16" Height="16" Stretch="Uniform"
+                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{Binding WindowTitle}" Style="{StaticResource HeadingStyle}"/>
+                    <TextBlock Text="Manage maintenance technician profile" Style="{StaticResource SubheadingStyle}" FontSize="12"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- Form -->
+        <StackPanel Grid.Row="1">
+
+            <!-- Full Name -->
+            <StackPanel Margin="0,0,0,14">
+                <TextBlock Text="FULL NAME *" Style="{StaticResource FormLabelStyle}"/>
+                <TextBox Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource ModernTextBoxStyle}"/>
+                <TextBlock Text="{Binding FullNameError}" Style="{StaticResource ErrorTextStyle}"
+                           Visibility="{Binding FullNameError, Converter={StaticResource StringVisible}}"/>
+            </StackPanel>
+
+            <!-- Specialty -->
+            <StackPanel Margin="0,0,0,14">
+                <TextBlock Text="SPECIALTY" Style="{StaticResource FormLabelStyle}"/>
+                <TextBox Text="{Binding Specialty, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource ModernTextBoxStyle}"/>
+                <TextBlock Text="{Binding SpecialtyError}" Style="{StaticResource ErrorTextStyle}"
+                           Visibility="{Binding SpecialtyError, Converter={StaticResource StringVisible}}"/>
+            </StackPanel>
+
+            <!-- General error -->
+            <Border Background="#3B1B1B" CornerRadius="6" Padding="12,8"
+                    Visibility="{Binding GeneralError, Converter={StaticResource StringVisible}}">
+                <TextBlock Text="{Binding GeneralError}" Foreground="#EF4444"
+                           FontSize="13" TextWrapping="Wrap"/>
+            </Border>
+        </StackPanel>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right"
+                    Margin="0,16,0,0">
+            <Button Content="Cancel"
+                    Style="{StaticResource SecondaryButtonStyle}"
+                    Command="{Binding CancelCommand}" Margin="0,0,8,0"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+            <Button Command="{Binding SaveCommand}"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Path Data="{StaticResource IconSave}" Fill="White"
+                          Width="13" Height="13" Stretch="Uniform" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Save Technician" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

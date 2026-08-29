@@ -1,0 +1,50 @@
+## .NET Core
+*.user
+*.userosscache
+*.sln.docstates
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.suo
+*.vs/
+.vs/
+_*.cs
+*.DotSettings.user
+
+## SQLite database files (generated at runtime)
+workorders.db
+workorders.db-shm
+workorders.db-wal
+*.db
+*.db-*
+
+## NuGet
+.nuget/
+packages/
+*.nupkg
+*.snupkg
+.packages/
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+BenchmarkDotNet.Artifacts/
+
+## OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+## Rider
+.idea/
+
+## VS Code
+.vscode/
+
+## Publish
+publish/

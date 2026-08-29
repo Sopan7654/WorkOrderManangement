@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/WorkOrderManagement.App/WorkOrderManagement.App.csproj" />
+    <Project Path="src/WorkOrderManagement.Application/WorkOrderManagement.Application.csproj" />
+    <Project Path="src/WorkOrderManagement.Domain/WorkOrderManagement.Domain.csproj" />
+    <Project Path="src/WorkOrderManagement.Infrastructure/WorkOrderManagement.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/WorkOrderManagement.Tests/WorkOrderManagement.Tests.csproj" />
+  </Folder>
+</Solution>
